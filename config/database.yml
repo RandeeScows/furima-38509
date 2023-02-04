@@ -58,7 +58,8 @@ production:
   <<: *default
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
-  #username: postgres
+  username: furima_38509_production_user
+
   #encoding: unicode
   #password:
 
