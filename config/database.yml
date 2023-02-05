@@ -58,9 +58,4 @@ production:
   <<: *default
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
-  username: <%= ENV['BASIC_AUTH_USER'] %>
-  password: <%= ENV['BASIC_AUTH_PASSWORD'] %>
-
-  #encoding: unicode
-  #password:
 
