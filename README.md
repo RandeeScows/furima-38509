@@ -1,100 +1,68 @@
 # テーブル設計
 
 
-## users テーブル
-
+## Users テーブル
 |Column        |Type    |Options                  |
 |--------------|--------|-------------------------|
-|name          |string  |null: false              |
+|nickname      |string  |null: false              |
 |email         |string  |null: false, unique: true|
-|nickname      |string  |null: false, unique: true|
 |password      |string  |null: false              |
-|address       |string  |null: false              |
+|name          |string  |null: false              |
+|phonetic      |string  |null: false              |
 |birthday      |datetime|null: false              |
 
 ### Association
-
 has_many :items
-has_many :comments
-has_many :favorites
-has_many :reports
-has_many :comments
+has_many :addresses
+has_many :orders
 
 
-## items テーブル
 
-|Column           |Type       |Options                       |
-|-----------------|-----------|------------------------------|
-|name             |string     |null: false                   |
-|price            |integer    |null: false                   |
-|shipping_cost_on |string     |null: false                   |
-|description      |text       |null: false                   |
-|user             |references |null: false, foreign_key: true|
-|condition        |string     |null: false                   |
-|shipped_from     |string     |null: false                   |
-|lead_time        |string     |null: false                   |
-|category         |string     |null: false                   |
-|sold_out         |boolean    |null: false                   |
-
-### Association
-
-belongs_to :user
-has_many :comments
-has_many :favorites
-has_many :reports
-has_many :comments
-
-
-## comments テーブル
-
-|Column           |Type       |Options                       |
-|-----------------|-----------|------------------------------|
-|comment          |text       |null: false                   |
-|created_at       |datetime   |null: false                   |
-|user             |references |null: false, foreign_key: true|
-|item             |references |null: false, foreign_key: true|
-
+## Items テーブル
+|Column               |Type       |Options                       |
+|---------------------|-----------|------------------------------|
+|name                 |string     |null: false                   |
+|price                |integer    |null: false                   |
+|description          |text       |null: false                   |
+|user                 |references |null: false, foreign_key: true|
+|category_id          |integer    |null: false                   |
+|condition_id         |integer    |null: false                   |
+|shipping_cost_on_id  |integer    |null: false                   |
+|origin_id            |integer    |null: false                   |
+|lead_time_id         |integer    |null: false                   |
+|like                 |integer    |                              |
+|report_id            |integer    |                              |
 
 ### Association
 belongs_to :user
-belongs_to :item
+has_one :order
 
 
 
-## shipping_addresses テーブル
+## Addresses テーブル
 |Column           |Type       |Options                       |
 |-----------------|-----------|------------------------------|
-|address          |string     |null: false                   |
+|zip_code         |string     |null: false| 
+|prefecture_id    |integer    |null: false|
+|township         |string     |null: false|
+|block            |string     |null: false|
+|building         |string     |null: false|
+|tel              |integer    |null: false|
 |user             |references |null: false, foreign_key: true|
-
 
 ### Association
 belongs_to :user
+has_many :orders
 
 
 
-## favorites テーブル
-|Column           |Type       |Options                       |
-|-----------------|-----------|------------------------------|
-|item             |references |null: false, foreign_key: true|
-|user             |references |null: false, foreign_key: true|
-
-
-### Association
-belongs_to :user
-belongs_to :item
-
-
-
-## report_incompliant_items テーブル
-|Column           |Type       |Options                       |
-|-----------------|-----------|------------------------------|
-|category         |string     |null: false                   |
-|description      |text       |null: false                   |
-|item             |references |null: false, foreign_key: true|
-|user             |references |null: false, foreign_key: true|
-|created_at       |datetime   |null: false                   |
-|resolved_at      |datetime   |                              |
+## Orders テーブル
+|Column           |Type       |Options                        |
+|-----------------|-----------|-------------------------------|
+|item             |references |null: false, foreign_key: true |
+|address          |references |null: false, foreign_key: true |
+|buyer            |references |null: false, foreign_key: true |
+|seller           |references |null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
