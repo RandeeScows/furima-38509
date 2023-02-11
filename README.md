@@ -44,14 +44,12 @@ has_one :order
 |prefecture_id    |integer    |null: false                   |
 |township         |string     |null: false                   |
 |block            |string     |null: false                   |
-|building         |string     |null: false                   |
+|building         |string     |                              |
 |tel              |string     |null: false                   |
-|user             |references |null: false, foreign_key: true|
 |order            |references |null: false, foreign_key: true|
 
 ### Association
-has_one :user
-has_one :order
+belongs_to :order
 
 
 
