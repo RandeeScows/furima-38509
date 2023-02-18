@@ -15,7 +15,7 @@ class User < ApplicationRecord
     validates :given_name
   end
     
-  with_options presence: true, format: { with: /\A[ァ-ンー]+\z/, message: '読み仮名には全角カタカナを使用してください' } do
+  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: '読み仮名には全角カタカナを使用してください' } do
     validates :phonetic_fn
     validates :phonetic_gn
   end

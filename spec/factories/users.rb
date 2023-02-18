@@ -9,7 +9,7 @@ FactoryBot.define do
     phonetic_fn { person.last.katakana }
     phonetic_gn { person.first.katakana }
     email { Faker::Internet.free_email }
-    password { Faker::Internet.password(min_length: 6) }
+    password { '1a' + Faker::Internet.password(min_length: 4) }
     password_confirmation { password }
     birthday { Faker::Date.between(from: '1930-01-01', to: '2020-01-01') }
   end
