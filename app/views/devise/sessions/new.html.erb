@@ -6,9 +6,8 @@
     <h1 class='form-header-text'>
       会員情報入力
     </h1>
-<% if @user.errors.any? %>
+
   <%= render 'shared_error_messages', model: f.object %>
-<% end %> 
 
   </div>
   <div class='login-flash-message'>
