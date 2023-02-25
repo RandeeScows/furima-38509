@@ -26,6 +26,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
+      it 'priceが小数では登録できない' do
+        @item.price = 300.1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be an integer")
+      end    
       it 'priceが300未満では登録できない' do
         @item.price = Faker::Number.between(from: 0, to:299)
         @item.valid?
@@ -81,6 +86,13 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+      #association
+      it 'ユーザーが紐づかなければ登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end

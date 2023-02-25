@@ -1,9 +1,8 @@
 class Item < ApplicationRecord
   
   validates :name, presence: true
-  validates :price, presence: true, 
-  numericality:{ greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
-  format:{ with:/\d{3,7}/, message: "300-9,999,999の範囲で半角数字で入力してください" }
+  validates :price, presence: true, numericality: { only_integer: true }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   validates :description, presence: true
   
   validates :category_id, presence: true
@@ -13,7 +12,7 @@ class Item < ApplicationRecord
   validates :lead_time_id, presence: true
 
   belongs_to :user
-  has_one :order
+  # has_one :order
   has_one_attached :image
   validates :image, presence: true
 
