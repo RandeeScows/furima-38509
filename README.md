@@ -24,7 +24,7 @@ has_many :orders
 |name                 |string     |null: false                   |
 |price                |integer    |null: false                   |
 |description          |text       |null: false                   |
-|user                 |references |null: false, foreign_key: true|
+|user                 |references |foreign_key: true             |
 |category_id          |integer    |null: false                   |
 |condition_id         |integer    |null: false                   |
 |shipping_cost_on_id  |integer    |null: false                   |
