@@ -18,10 +18,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def create_table
-    @item = Item.new(item_params)
-  end
-
   private
   def item_params
     params.require(:item).permit(
