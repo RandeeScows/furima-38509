@@ -29,10 +29,10 @@ RSpec.describe Item, type: :model do
       it 'priceが小数では登録できない' do
         @item.price = 300.1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be an integer")
-      end    
+        expect(@item.errors.full_messages).to include('Price must be an integer')
+      end
       it 'priceが300未満では登録できない' do
-        @item.price = Faker::Number.between(from: 0, to:299)
+        @item.price = Faker::Number.between(from: 0, to: 299)
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end

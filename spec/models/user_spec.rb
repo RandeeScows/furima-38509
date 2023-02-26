@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordが英字だけでは登録できない' do
-        @user.password = Faker::Lorem.words(number:6)
+        @user.password = Faker::Lorem.words(number: 6)
         @user.valid?
         expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
@@ -122,9 +122,8 @@ RSpec.describe User, type: :model do
       it 'birthdayが空では登録できない' do
         @user.birthday = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Birthday can't be blank")  
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
     end
   end
 end
-

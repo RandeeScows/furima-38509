@@ -18,19 +18,19 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :category_id, numericality: { other_than: 1 , message: "can't be blank" }
   
   belongs_to :condition
-  validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :condition_id, numericality: { other_than: 1 , message: "can't be blank" }
   
   belongs_to :shipping_cost_on
-  validates :shipping_cost_on_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :shipping_cost_on_id, numericality: { other_than: 1 , message: "can't be blank" }
   
   belongs_to :origin
-  validates :origin_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :origin_id, numericality: { other_than: 1 , message: "can't be blank" }
 
   belongs_to :lead_time
-  validates :lead_time_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :lead_time_id, numericality: { other_than: 1 , message: "can't be blank" }
 
 
 end
