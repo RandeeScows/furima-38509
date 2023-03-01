@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :move_to_index, except: [:index, :show] 
   before_action :validate_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit]
   before_action :set_item, only: [:show, :edit, :update]
+
 
   def index
     @items = Item.order("created_at DESC")
@@ -22,11 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @user = User.find(@item.user_id)
   end
 
   def edit
-    @user = User.find(@item.user_id)
   end 
 
   def update
@@ -41,6 +41,10 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end 
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(
