@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :move_to_index, except: [:index, :show] 
-  before_action :validate_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :validate_user, only: [:edit, :update, :destory]
 
 
   def index
@@ -37,24 +36,32 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
+  end
+
+
   private
+  def set_user
+    item = Item.find(params[:id])
+    user_id = item[:user_id]
+    @user = User.find(user_id)
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end 
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
   def item_params
     params.require(:item).permit(
-    :id, :name, :image, :price, :description, :category_id, :condition_id,
+    :name, :image, :price, :description, :category_id, :condition_id,
     :shipping_cost_on_id, :origin_id, :lead_time_id
     ).merge(user_id: current_user.id)
   end
 
   def validate_user
-    @item = Item.find(params[:id])
     unless current_user.id == @item.user_id
       redirect_to root_path
     end
