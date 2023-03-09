@@ -20,12 +20,13 @@ RSpec.describe OrderAddress, type: :model do
     end  
 
     context '商品が購入できない場合' do
-      #token
+      #credit card
       it 'tokenが空では購入できない' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
+ 
 
       #address
       it '郵便番号が空では購入できない' do
@@ -58,8 +59,18 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Tel can't be blank")                        
       end
-      it '電話番号が半角10桁以上11桁以内の他は購入できない' do
+      it '電話番号が半角数字10桁未満では購入できない' do
         @order_address.tel = 123456789
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Tel is invalid')
+      end
+      it '電話番号が半角数字11桁超過では購入できない' do
+        @order_address.tel = 123456789012
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Tel is invalid')
+      end
+      it '電話番号が半角数字以外では購入できない' do
+        @order_address.tel = '12345678９０'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Tel is invalid')
       end

@@ -11,10 +11,6 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new
   end
 
-  def new
-
-  end
-
   def create
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
@@ -29,10 +25,7 @@ class OrdersController < ApplicationController
   private 
   def set_item
     @item = Item.find(params[:item_id])
-  end
-
-  def set_order
-    @order = Item.find(params[:item_id])
+    @order = Order.find(params[:order_id])
   end
 
   def order_params
