@@ -26,6 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.order.present?
+      redirect_to root_path
+    end
   end 
 
   def update
@@ -58,7 +61,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(
     :name, :image, :price, :description, :category_id, :condition_id,
     :shipping_cost_on_id, :origin_id, :lead_time_id
-    ).merge(user_id: current_user.id)
+    ).merge(user_id: current_user.id )
   end
 
   def validate_user
